@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Love Letter</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      background: #ffe6f0;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 10s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    .envelope-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      z-index: 2;
+      transition: transform 0.2s ease;
+    }
+
+    .envelope {
+      width: 220px;
+      height: 130px;
+      position: relative;
+      background: pink;
+      border-radius: 6px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+
+    .envelope .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 110px solid transparent;
+      border-right: 110px solid transparent;
+      border-bottom: 65px solid #ffb6c1;
+      transform-origin: top center;
+      transition: transform 1s ease;
+      z-index: 3;
+    }
+
+    .envelope.open .flap {
+      transform: rotateX(180deg);
+    }
+
+    .envelope .body {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+      padding-bottom: 20px;
+      color: #b30059;
+    }
+
+    .love-letter {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      max-width: 500px;
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      z-index: 3;
+      text-align: center;
+    }
+
+    .spotify-embed {
+      margin-bottom: 20px;
+    }
+
+    .hearts-explosion {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .hearts-explosion span {
+      position: absolute;
+      font-size: 2rem;
+      color: red;
+      animation: explode 1s ease-out forwards;
+    }
+
+    @keyframes explode {
+      0% {
+        transform: scale(1) translate(0, 0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2) translate(var(--x), var(--y));
+        opacity: 0;
+      }
+    }
+
+    /* Styles for girlfriend's pictures */
+    .girlfriend-picture {
+      position: absolute;
+      width: 100px; /* Adjust size as needed */
+      animation: float 10s linear infinite; /* Same float animation as hearts */
+      user-select: none;
+      pointer-events: none;
+      border-radius: 15px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Hearts -->
+  <script>
+    // Generate hearts
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = `${Math.random() * 100}vw`;
+      heart.style.animationDuration = `${5 + Math.random() * 5}s`;
+      document.body.appendChild(heart);
+    }
+
+    // Array of different photo URLs
+    const girlfriendPhotos = [
+      "photo1.jpg",
+      "photo2.jpg",
+      "photo3.jpg"
+      // Add more photo URLs as needed
+    ];
+
+    // Create multiple floating pictures with different source photos
+    for (let i = 0; i < 10; i++) { // Adjust number of pictures
+      const img = document.createElement("img");
+      // Pick a random photo from the array
+      const randomPhoto = girlfriendPhotos[Math.floor(Math.random() * girlfriendPhotos.length)];
+      img.src = randomPhoto; 
+      img.alt = "Girlfriend";
+      img.classList.add("girlfriend-picture");
+      img.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+      img.style.top = `${Math.random() * 100}vh`; // Random vertical start position
+      img.style.animationDuration = `${5 + Math.random() * 5}s`; // Random animation duration
+      document.body.appendChild(img);
+    }
+  </script>
+
+  <!-- Envelope -->
+  <div class="envelope-wrapper" id="envelopeWrapper">
+    <div class="envelope" id="envelope">
+      <div class="flap"></div>
+      <div class="body">Click Me 💌</div>
+    </div>
+  </div>
+
+  <!-- Love Letter -->
+  <div class="love-letter" id="letter">
+    <div class="spotify-embed">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/06IkOr83qPqa3yYvrIjgxp?utm_source=generator" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+    <h2>Happy Anniversary Baby!❤️</h2>
+    <p>
+      Hi baby lovelove! Happy anniversary sa'yo baby mahal ko. I'm so happy and excited while creating this and the kilig is super-duper kilig talaga as in! I am very thankful for having you sa akoang life and ako na ata ang pinaka swerte nga tawo sa kalibutan hehe. 
+
+Thank you for being there, sa akong ups and downs you always shows up and thankful ko nag bag o nata both dili nata same as before if naay misunderstandings. Sorry baby ug wala ko dhas duol nimo karon nga 2nd anniv na nato sorry kaayo dili ta ka celebrate same sa uban nga mag date2 unta masabtan ra ko nimo. Sorry pud baby ug wala koy gifts everytime monthsary or anniv nato. Continue lang tas pag hatag ug pag love sa usat usa baby unta if mag away ta mag ingon naka same sa karon para dili na mulala pa, and if ever lala na kaayo we should give ourselves some time to relax muna at makapag isip isip. 
+
+Mahal na mahal kita lovelove ko I hope ma appreciate nimo ni akong gamayng gift for our anniv mao ramay makeri nako love :< Hoping na both of us makuha nato atong mga pangandoy and unta all sa atong mga prayers is matinuod in the right time because God only knows what will happen and we should be trusting him because he always guided us and he made us this far sa atong relationship. 
+
+Lastly lovelove unta masendan ko nimo boobies nga dili blurred hehe. I love you so so so so so much lovelove my greatest love of all. We fight, We fix, We stay. Together! Forever! Happy Anniversary baby lovelove!
+    </p>
+  </div>
+
+  <!-- Heart Explosion -->
+  <div class="hearts-explosion" id="explosion"></div>
+
+  <script>
+    const envelopeWrapper = document.getElementById('envelopeWrapper');
+    const envelope = document.getElementById('envelope');
+    const letter = document.getElementById('letter');
+    const explosion = document.getElementById('explosion');
+
+    let dodging = true;
+    const startTime = Date.now();
+    const dodgeDuration = 10000; // 10 seconds
+
+    function distance(x1, y1, x2, y2) {
+      return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      if (!dodging) return;
+
+      const rect = envelopeWrapper.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const dist = distance(e.clientX, e.clientY, centerX, centerY);
+
+      if (dist < 100) {
+        const offsetX = (centerX - e.clientX) * 2;
+        const offsetY = (centerY - e.clientY) * 2;
+
+        const newX = Math.min(Math.max(centerX + offsetX, 100), window.innerWidth - 100);
+        const newY = Math.min(Math.max(centerY + offsetY, 100), window.innerHeight - 100);
+
+        envelopeWrapper.style.left = `${newX}px`;
+        envelopeWrapper.style.top = `${newY}px`;
+      }
+    });
+
+    setTimeout(() => {
+      dodging = false;
+      envelopeWrapper.style.left = '50%';
+      envelopeWrapper.style.top = '50%';
+      envelopeWrapper.style.transform = 'translate(-50%, -50%)';
+    }, dodgeDuration);
+
+    envelopeWrapper.addEventListener('click', () => {
+      if (dodging) return;
+
+      envelope.classList.add('open');
+
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement('span');
+        heart.innerHTML = '❤️';
+        heart.style.setProperty('--x', `${(Math.random() - 0.5) * 400}px`);
+        heart.style.setProperty('--y', `${(Math.random() - 0.5) * 400}px`);
+        explosion.appendChild(heart);
+        setTimeout(() => heart.remove(), 1000);
+      }
+
+      setTimeout(() => {
+        envelopeWrapper.style.display = 'none';
+        letter.style.display = 'block';
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

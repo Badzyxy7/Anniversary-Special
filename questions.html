@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Questions for My Love</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffcccc, #ffe6e6);
+      margin: 0;
+    }
+
+    h1 {
+      color: #b30059;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    input[type="date"], input[type="range"] {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #ff66a3;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #e60073;
+    }
+
+    .message {
+      margin-top: 30px;
+      font-size: 2rem;
+      color: #cc0052;
+      font-weight: bold;
+      text-align: center;
+      display: none;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Answer the Questions</h1>
+  <form id="questionForm">
+    <!-- When did I start courting you? -->
+    <label for="courtingDate">When did I start courting you?</label>
+    <input type="date" id="courtingDate" required />
+
+    <!-- How much do you love me? -->
+    <label>How much do you love me?</label>
+    
+    <!-- Adjustable Health Bar -->
+    <label for="healthBar">Adjust your love level:</label>
+    <input type="range" id="healthBar" min="1" max="700" value="100" />
+    <span id="healthValue">100%</span>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <div class="message" id="message">Thank you for your answers! ❤️</div>
+
+  <script>
+    const questionForm = document.getElementById('questionForm');
+    const message = document.getElementById('message');
+    const healthBar = document.getElementById('healthBar');
+    const healthValue = document.getElementById('healthValue');
+
+    // Update health value display
+    healthBar.addEventListener('input', function() {
+      healthValue.textContent = healthBar.value + '%';
+    });
+
+    questionForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      questionForm.style.display = 'none';
+      message.style.display = 'block';
+
+      setTimeout(() => {
+        window.location.href = "main.html"; // Redirect to main page
+      }, 2500); // wait 2.5 seconds
+    });
+  </script>
+</body>
+</html>
