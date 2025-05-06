@@ -64,9 +64,40 @@
       from { opacity: 0; transform: scale(0.95); }
       to { opacity: 1; transform: scale(1); }
     }
+
+    /* Password Gate Styling */
+    #passwordGate {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #ffe6f0;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    #passwordGate.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Password Gate -->
+  <div id="passwordGate">
+    <h1 style="color:#b30059;">Enter the Secret Code 💖</h1>
+    <input type="password" id="pwInput" placeholder="Enter password..." style="padding:10px; border-radius:8px; font-size:1rem;"/>
+    <button onclick="checkPw()" style="margin-top:10px; padding:10px 20px; background-color:#ff66a3; color:white; border:none; border-radius:8px; font-weight:bold;">Enter</button>
+    <div id="pwError" style="margin-top:10px; color:red; display:none;">Oops! Try again, love 😢</div>
+  </div>
+
+  <!-- Main Content -->
   <h1>Guess My 3 Favorite Foods</h1>
   <form id="foodForm">
     <input type="text" placeholder="Favorite Food 1" required />
@@ -78,6 +109,21 @@
   <div class="message" id="message">You never guessed wrong because you're always right ❤️</div>
 
   <script>
+    function checkPw() {
+      const input = document.getElementById('pwInput').value;
+      const gate = document.getElementById('passwordGate');
+      const error = document.getElementById('pwError');
+
+      if (input === '05072023') {
+        gate.classList.add('hidden');
+        setTimeout(() => {
+          gate.style.display = 'none';
+        }, 500);
+      } else {
+        error.style.display = 'block';
+      }
+    }
+
     const form = document.getElementById('foodForm');
     const message = document.getElementById('message');
 
@@ -88,8 +134,9 @@
 
       setTimeout(() => {
         window.location.href = "questions.html";
-      }, 2500); // wait 2.5 seconds
+      }, 2500);
     });
   </script>
+
 </body>
 </html>
